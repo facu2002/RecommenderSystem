@@ -1,4 +1,6 @@
 from math import sqrt
+from utils import intersection_qualified_items
+
 
 
 def mean_rows(matrix, u, intersecting_columns):
@@ -10,29 +12,6 @@ def mean_rows(matrix, u, intersecting_columns):
     return sum / len(intersecting_columns)
   return 0
 
-def take_line(matrix, num_line):
-  line = dict()
-  for i in range(matrix[0][1]):
-    if (num_line, i) in matrix[1]:
-      line[(num_line, i)] = (matrix[1][(num_line, i)])
-  return line
-      
-
-
-def intersection_qualified_items(matrix, u, v):
-  intersection_items = []
-  # pedir la fila 1
-  row1 = take_line(matrix, u)
-
-  # pedir la fila 2
-  row2 = take_line(matrix, v)
-
-  # recorremos el for en base al numero de columnas
-  for i in range(matrix[0][1]):
-    if (u, i) in row1 and (v, i) in row2:
-      intersection_items.append(i)
-  
-  return intersection_items
 
 
 def pearson_correlation_coefficient(matrix, u):
