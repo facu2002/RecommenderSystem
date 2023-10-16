@@ -1,22 +1,14 @@
 
-from utils import intersection_qualified_items
 from prediction.Prediction import Prediction
 
+from Recommender import Recommender
+
 class SimplePrediction(Prediction):
-  
   @staticmethod
   def predict():
-    numerador = 0
-    aux = [abs(Prediction.neighbors[(Prediction.u,v)]) for v in range(len(Prediction.neighbors) + 1) if v != Prediction.u]
-    print("El aux es ", aux)
-    denominador = sum(aux)
-    print("La suma de las similitudes es -> ", denominador)
-    for v in range(len(Prediction.neighbors)):
-      if v == Prediction.u:
-        continue
-      else:
-        intersection = intersection_qualified_items(Prediction.matrix, Prediction.u, v)
-        for i in intersection:
-          numerador += Prediction.neighbors[(Prediction.u,v)] * Prediction.matrix[v][i]
-          
-    print("HOLA EZ%R ES ", numerador / denominador)
+    numerator = 0
+    denominator = 0
+    for similarity_key, similarity_value in Recommender.neighbors.items():
+      numerator += similarity_value * Recommender.matrix[similarity_key[1]][Recommender.coordinate_prediction[1]]
+      denominator += similarity_value
+    return numerator / denominator
