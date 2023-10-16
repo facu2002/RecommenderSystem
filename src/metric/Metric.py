@@ -1,31 +1,21 @@
-from math import sqrt
-from utils import intersection_qualified_items
 from abc import ABC, abstractmethod
 
 
 class Metric(ABC):
+  matrix = []
+  u = None
   
   @abstractmethod
-  def similutues():
+  def similarity(matrix, u):
     pass
-  
-  
-  
-  
+
   @staticmethod
-  def euclidean_distance(matrix, u):
-    resultados = dict()
-    for v in range(len(matrix)):
-      if v == u:
-        continue
-      else:
-        intersection = intersection_qualified_items(matrix, u, v)
-        result = 0
-        for i in intersection:
-          result += (matrix[u][i]  - matrix[v][i])**2
-        resultados[f"Sim({u}, {v})"] = sqrt(result)
-    return resultados
-
-
-if __name__ == "__main__":
-  pass
+  def mean_rows(matrix, u, intersecting_columns):
+    if len(intersecting_columns) != 0:
+      sum = 0
+      for i in range(len(matrix[0])):
+        if i in intersecting_columns:
+          sum += matrix[u][i]
+      return sum / len(intersecting_columns)
+    return 0
+  

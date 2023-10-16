@@ -5,15 +5,15 @@ from metric.Metric import Metric
 
 class EuclideanDistance(Metric):
   @staticmethod
-  def similutues(matrix, u):
-    resultados = dict()
-    for v in range(len(matrix)):
-      if v == u:
+  def similarity():
+    result = dict()
+    for v in range(len(Metric.matrix)):
+      if v == Metric.u:
         continue
       else:
-        intersection = intersection_qualified_items(matrix, u, v)
+        intersection = intersection_qualified_items(Metric.matrix, Metric.u, v)
         result = 0
         for i in intersection:
-          result += (matrix[u][i]  - matrix[v][i])**2
-        resultados[f"Sim({u}, {v})"] = sqrt(result)
-    return resultados
+          result += (Metric.matrix[Metric.u][i]  - Metric.matrix[v][i])**2
+        result[f"Sim({Metric.u}, {v})"] = sqrt(result)
+    return result

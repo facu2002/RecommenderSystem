@@ -1,13 +1,14 @@
 from file_system import load_data
-from utils import intersection_qualified_items, print_matrix
-from metric.pearson_correlation import pearson_correlation_coefficient
-from metric.cosine_distance import cosine_distance_coefficient
-from metric.euclidean_distance import euclidean_distance
-from prediction.simple_prediction import simple_prediction
+from utils import intersection_qualified_items, print_matrix, get_neighbor
 
 
 from metric.Metric import Metric
+from metric.PearsonCorrelation import PearsonCorrelation
+from metric.CosineDistance import CosineDistance
 
+from prediction.Prediction import Prediction
+from prediction.SimplePrediction import SimplePrediction
+from prediction.DifferenceAverage import DifferenceAverage
 
 
 num_dataset = int(input("Indica el número de dataset a utilizar\n>> "))
@@ -22,25 +23,21 @@ print_matrix(utility_matrix)
 
 # PRUEBAS DE CLASES
 
-print(Metric.pearson_correlation_coefficient(utility_matrix, 0))
-print(Metric.pearson_correlation_coefficient(utility_matrix, 0))
-print(Metric.pearson_correlation_coefficient(utility_matrix, 0))
+Metric.matrix = utility_matrix
+Metric.u = 0
 
 
+print(PearsonCorrelation.similarity())
 
+num_neighbor = int(input("Indica el número de vecinos\n>> "))
 
+neighbors = get_neighbor(num_neighbor, PearsonCorrelation.similarity())
 
+print(neighbors)
 
+Prediction.matrix = utility_matrix
+Prediction.neighbors = neighbors
+Prediction.u = 0
 
-# option = int(input("¿Qué Métrica desea? Los posibles valores son:\n[1] Correlación de Pearson.\n[2] Distancia coseno.\n[3] Distancia Euclídea.\n>> "))
+print(SimplePrediction.predict())
 
-# if option == 1:
-#   print(pearson_correlation_coefficient(utility_matrix, 0))
-# elif option == 2:
-#   print(cosine_distance_coefficient(utility_matrix, 0))
-# else:
-#   print(euclidean_distance(utility_matrix, 0))
-
-# # num_neighbors = int(input("Indica el número de vecinos a considerar\n>> "))
-
-# print(simple_prediction(utility_matrix, 0, pearson_correlation_coefficient(utility_matrix, 0)))
