@@ -20,7 +20,7 @@ num_dataset = int(input("\nIndica el número de dataset a utilizar\n>> "))
 # Leemos el fichero
 file_name = f"./data/data{num_dataset}.txt"
 
-num_neighbor = int(input("\nIndica el número de vecinos\n>> "))
+num_neighbor = int(input("\nCONTROLAR QUE SEA MAYOR QUE 0 Y MENOR QUE N-1 Indica el número de vecinos\n>> "))
 
 
 metric_option = -1
