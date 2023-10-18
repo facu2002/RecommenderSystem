@@ -20,7 +20,11 @@ num_dataset = int(input("\nIndica el número de dataset a utilizar\n>> "))
 # Leemos el fichero
 file_name = f"./data/data{num_dataset}.txt"
 
-num_neighbor = int(input("\nCONTROLAR QUE SEA MAYOR QUE 0 Y MENOR QUE N-1 Indica el número de vecinos\n>> "))
+
+# num_neighbor = 0
+# while num_neighbor > len(Recommender.matrix) or num_neighbor < 1:
+num_neighbor = int(input("\nIndica el número de vecinos\n>> "))
+  
 
 
 metric_option = -1
@@ -59,6 +63,6 @@ while prediction_option < 0 or prediction_option > 1:
 
 recommender = Recommender(file_name, num_neighbor, metric_function)
 
+
 result = recommender.run(prediction_function)
 
-print(result)
