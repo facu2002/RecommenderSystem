@@ -6,12 +6,15 @@ class Recommender:
   lower = None
   upper = None
   matrix = []
+  matrix_mala = []
   neighbors = []
   coordinate_prediction = (None, None)
   
   
   def __init__(self, file_name, num_neighbors, similarity_function):
-    Recommender.lower, Recommender.upper, Recommender.matrix = load_data(file_name)
+    Recommender.lower, Recommender.upper, Recommender.matrix_mala = load_data(file_name)
+    ### normalizar  CAMBIAR LO DE MATRIZ MALA
+    Recommender.matrix = self.normalizar(Recommender.matrix_mala)
     self.num_neighbors = num_neighbors
     self.similarity_function = similarity_function
     self.prediction_queue = None
@@ -123,3 +126,9 @@ class Recommender:
       indices_none += [(row[1],indice) for indice, valor in enumerate(Recommender.matrix[row[1]]) if valor is None]
     self.prediction_queue = indices_none
 
+
+
+  def normalizar(self, matrix_mala):
+    
+
+    return matrix_mala
