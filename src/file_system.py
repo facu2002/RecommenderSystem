@@ -4,8 +4,8 @@ def load_data(file_name):
   with open(file_name, "r") as file_system:
     # Rellenamos la matriz
     lines = file_system.readlines()
-    lower_limit = lines[0]
-    upper_limit = lines[1]
+    lower_limit = float(lines[0])
+    upper_limit = float(lines[1])
     for line in lines[2:]:
       aux_row = []
       for element in line.split():

@@ -66,3 +66,9 @@ recommender = Recommender(file_name, num_neighbor, metric_function)
 
 result = recommender.run(prediction_function)
 
+
+print("\n#####################################################")
+print("\nMatriz final")
+print("\n#####################################################")
+Recommender.print_matrix("output.txt")
+

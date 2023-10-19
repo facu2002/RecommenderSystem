@@ -11,109 +11,55 @@ class Recommender:
   
   
   def __init__(self, file_name, num_neighbors, similarity_function):
-    # Recommender.coordinate_prediction = (0, 4)
     Recommender.lower, Recommender.upper, Recommender.matrix = load_data(file_name)
     self.num_neighbors = num_neighbors
     self.similarity_function = similarity_function
-    # Recommender.neighbors = Recommender.get_neighbors(num_neighbors, similarity_function())
     self.prediction_queue = None
 
-
-
-  # def run(self, prediction_function):
-  #   print("\nMatriz Inicial\n")
-  #   self.print_matrix()
-  #   self.calculate_prediction_queue()
-  #   while self.prediction_queue:
-  #     prioridad, fila = heapq.heappop(self.prediction_queue)
-  #     print("LA COLA ES ACTUALMENTE -->", self.prediction_queue) 
-  #     if prioridad != 0:
-  #       Recommender.coordinate_prediction = (fila, Recommender.matrix[fila].index(None))
-  #       Recommender.neighbors = Recommender.get_neighbors(self.num_neighbors, self.similarity_function())
-  #       if len(Recommender.neighbors) == 0:
-  #         print("EY AQUI HA OCURRIDO EL CASO ESPECIAL", Recommender.coordinate_prediction, "y entonces", (prioridad, fila), "Lo vuelvo a meter a la cola")
-  #         heapq.heappush(self.prediction_queue, (prioridad, fila))
-  #         return
-          
-  #       result = round(prediction_function(), 2)
-  #       Recommender.matrix[Recommender.coordinate_prediction[0]][Recommender.coordinate_prediction[1]] = result
-  #       self.calculate_prediction_queue()
-  #       # print(f"\nMatriz Actualizada en la posición {Recommender.coordinate_prediction}\n")
-  #       # self.print_matrix()        
-  #   print("\nMatriz Final\n")
-  #   self.print_matrix()
-  #   #return prediction_function()
-    
-  # def run(self, prediction_function):
-  #   iterador = 3
-  #   print("\nMatriz Inicial\n")
-  #   self.print_matrix()
-  #   self.calculate_prediction_queue()
-  #   while self.prediction_queue:
-  #     prioridad, fila = self.prediction_queue.pop(0)
-  #     print("LA COLA ES ACTUALMENTE -->", self.prediction_queue) 
-  #     if prioridad != 0:
-  #       Recommender.coordinate_prediction = (fila, Recommender.matrix[fila].index(None))
-  #       Recommender.neighbors = Recommender.get_neighbors(self.num_neighbors, self.similarity_function())
-  #       if len(Recommender.neighbors) == 0:
-  #         print("EY AQUI HA OCURRIDO EL CASO ESPECIAL", Recommender.coordinate_prediction, "y entonces", (prioridad, fila), "Lo vuelvo a meter a la cola")
-  #         print("ESTABA ASI ANTES DEL APPEND", self.prediction_queue)
-  #         self.prediction_queue.append((prioridad, fila))
-  #         print("VEAMOS COMO QUEDO LA COLA", self.prediction_queue)
-  #         # iterador -= 1
-  #         # if iterador == 0:
-  #         #   return
-  #         continue
-          
-  #       result = round(prediction_function(), 2)
-  #       Recommender.matrix[Recommender.coordinate_prediction[0]][Recommender.coordinate_prediction[1]] = result
-  #       self.calculate_prediction_queue()
-  #       # print(f"\nMatriz Actualizada en la posición {Recommender.coordinate_prediction}\n")
-  #       # self.print_matrix()        
-  #   print("\nMatriz Final\n")
-  #   self.print_matrix()
-  #   #return prediction_function()
-
   def run(self, prediction_function):
-    iterador = 3
-    print("\nMatriz Inicial\n")
+    print("\n#####################################################")
+    print("\nMatriz Inicial")
+    print("\n#####################################################")
+
     self.print_matrix()
     self.calculate_prediction_queue()
+    iterator = 0
     while self.prediction_queue:
       Recommender.coordinate_prediction  = self.prediction_queue.pop(0)
-      print("LA COLA ES ACTUALMENTE -->", self.prediction_queue) 
       Recommender.neighbors = Recommender.get_neighbors(self.num_neighbors, self.similarity_function())
       if len(Recommender.neighbors) == 0:
-        print("EY AQUI HA OCURRIDO EL CASO ESPECIAL", Recommender.coordinate_prediction, "Lo vuelvo a meter a la cola")
-        print("ESTABA ASI ANTES DEL APPEND", self.prediction_queue)
         self.prediction_queue.append(Recommender.coordinate_prediction)
-        print("VEAMOS COMO QUEDO LA COLA", self.prediction_queue)
-        # iterador -= 1
-        # if iterador == 0:
-        #   return
         continue
-        
       result = round(prediction_function(), 2)
       Recommender.matrix[Recommender.coordinate_prediction[0]][Recommender.coordinate_prediction[1]] = result
-      # print(f"\nMatriz Actualizada en la posición {Recommender.coordinate_prediction}\n")
-      # self.print_matrix()        
-    print("\nMatriz Final\n")
-    self.print_matrix()
-    #return prediction_function()
-    
+      print("\n#####################################################")
+      print(f"\nMatriz en la iteración {iterator}")
+      print("\n#####################################################")
+      self.print_matrix()
+      iterator += 1
+    return Recommender.matrix    
 
-  def print_matrix(self):
-    if len(Recommender.matrix) == 0:
-      print(f"La matriz de {len(Recommender.matrix)} X {len(Recommender.matrix[0])}")
-      return
-    print(f"La matriz de {len(Recommender.matrix)} X {len(Recommender.matrix[0])}")
-    for row in Recommender.matrix:
-      for element in row:
-        if element == None:
-          print(f"{'-':<6}", end=" ")
-        else:
-          print(f"{element:<6}", end=" ")  
-      print()
+
+  def print_matrix(self, out_file="output.txt"):
+    with open(out_file, "w") as file:
+      
+      aux = f"\nLa matriz de {len(Recommender.matrix)} X {len(Recommender.matrix[0])}\n"
+      aux += f"El rango de los valores es {Recommender.lower} - {Recommender.upper}\n"
+      print(aux, file=file)
+      print(aux)
+
+      if len(Recommender.matrix) == 0:
+        return
+      for row in Recommender.matrix:
+        for element in row:
+          if element == None:
+            print(f"{'-':<6}", end=" ", file=file)
+            print(f"{'-':<6}", end=" ")
+          else:
+            print(f"{element:<6}", end=" ", file=file)
+            print(f"{element:<6}", end=" ")  
+        print()
+        print("", file=file)
 
 
   def mean_rows(matrix, user, intersecting_columns):
@@ -124,6 +70,7 @@ class Recommender:
           sum += matrix[user][i]
       return sum / len(intersecting_columns)
     return 0
+
 
   @staticmethod
   def intersection_qualified_items(u, v):
@@ -143,9 +90,9 @@ class Recommender:
       return neighbors
     for x in ordered_similarity:
       if Recommender.matrix[x[1]][Recommender.coordinate_prediction[1]] != None:
-        neighbors[x] = (similarity[x])
+        neighbors[x] = similarity[x]
         num_neighbor -= 1
-      if num_neighbor == 0:
+      if num_neighbor <= 0:
         break
     return neighbors
   
@@ -173,17 +120,6 @@ class Recommender:
     # Convertir la lista en una cola de prioridad (heap)
     indices_none = []
     for row in sorted(priority_rows, key=lambda x: x[0]):
-      print(row)
       indices_none += [(row[1],indice) for indice, valor in enumerate(Recommender.matrix[row[1]]) if valor is None]
     self.prediction_queue = indices_none
 
-
-  def nombre_facu():
-    print("Esta prueba la esta realizando ", Recommender.coordinate_prediction )
-    print("")
-    for neighbor in Recommender.neighbors:
-      print("     veamo sus vecinos nos dicen que", Recommender.matrix[neighbor[1]][Recommender.coordinate_prediction[1]])
-      if Recommender.matrix[neighbor[1]][Recommender.coordinate_prediction[1]] == None:
-        return True
-    return False
-      
