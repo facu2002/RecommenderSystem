@@ -15,5 +15,5 @@ class DifferenceAverage(Prediction):
       aux_mean_v = list(filter(lambda x: x != None, Recommender.matrix[similarity_key[1]]))
       mean_v = sum(aux_mean_v) / len(aux_mean_v)
       numerator += similarity_value * (Recommender.matrix[similarity_key[1]][Recommender.coordinate_prediction[1]] - mean_v)
-      denominator += similarity_value
+      denominator += abs(similarity_value)
     return mean_u + (numerator / denominator)
