@@ -5,11 +5,11 @@ from Recommender import Recommender
 
 class SimplePrediction(Prediction):
   @staticmethod
-  def predict():
+  def predict(recommender):
     numerator = 0
     denominator = 0
-    for similarity_key, similarity_value in Recommender.neighbors.items():
-      numerator += similarity_value * Recommender.matrix[similarity_key[1]][Recommender.coordinate_prediction[1]]
+    for similarity_key, similarity_value in recommender.neighbors.items():
+      numerator += similarity_value * recommender.matrix[similarity_key[1]][recommender.coordinate_prediction[1]]
       denominator += abs(similarity_value) 
     result = numerator / denominator
     ################## Todo

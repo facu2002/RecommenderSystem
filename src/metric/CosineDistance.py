@@ -5,19 +5,19 @@ from metric.Metric import Metric
 class CosineDistance(Metric):
 
   @staticmethod
-  def similarity():
+  def similarity(recommender):
     result = dict()
-    for v in range(len(Recommender.matrix)):
-      if v == Recommender.coordinate_prediction[0]:
+    for v in range(len(recommender.matrix)):
+      if v == recommender.coordinate_prediction[0]:
         continue
       else:
-        intersection = Recommender.intersection_qualified_items(Recommender.coordinate_prediction[0], v)
+        intersection = recommender.intersection_qualified_items(recommender.coordinate_prediction[0], v)
         numerator = 0
         denominator1 = 0
         denominator2 = 0 
         for i in intersection:
-          numerator += (Recommender.matrix[Recommender.coordinate_prediction[0]][i]  * Recommender.matrix[v][i] )
-          denominator1 += Recommender.matrix[Recommender.coordinate_prediction[0]][i]**2
-          denominator2 += Recommender.matrix[v][i]**2
+          numerator += (recommender.matrix[recommender.coordinate_prediction[0]][i]  * recommender.matrix[v][i] )
+          denominator1 += recommender.matrix[recommender.coordinate_prediction[0]][i]**2
+          denominator2 += recommender.matrix[v][i]**2
         result[(0, v)] = numerator / (sqrt(denominator1) * sqrt(denominator2))
     return result

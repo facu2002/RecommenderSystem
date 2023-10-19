@@ -1,32 +1,30 @@
-from file_system import load_data
-
-
-from metric.Metric import Metric
+# Importamos las dependencias del cálculo de las similitudes
 from metric.PearsonCorrelation import PearsonCorrelation
 from metric.CosineDistance import CosineDistance 
 from metric.EuclideanDistance import EuclideanDistance
 
 
-from prediction.Prediction import Prediction
-
+# Importamos las dependencias del cálculo de la predicción
 from prediction.SimplePrediction import SimplePrediction
 from prediction.DifferenceAverage import DifferenceAverage
 
 
+# Importamos la clase recomendadora
 from Recommender import Recommender
 
 
+# Leemos el fichero de entrada de datos
 num_dataset = int(input("\nIndica el número de dataset a utilizar\n>> "))
-# Leemos el fichero
 file_name = f"./data/data{num_dataset}.txt"
 
 
+# Leemos el número de vecinos
 # num_neighbor = 0
 # while num_neighbor > len(Recommender.matrix) or num_neighbor < 1:
 num_neighbor = int(input("\nIndica el número de vecinos\n>> "))
   
-
-
+  
+# Elección de la métrica
 metric_option = -1
 while metric_option < 0 or metric_option > 2:
   print("\n[0] Correlación Pearson")
@@ -44,7 +42,7 @@ while metric_option < 0 or metric_option > 2:
     print("\nSelección incorrecta")
 
 
-
+# Elección de la predicción
 prediction_option = -1
 while prediction_option < 0 or prediction_option > 1:
   print("\n[0] Predicción simple")
@@ -60,17 +58,13 @@ while prediction_option < 0 or prediction_option > 1:
 
 
 
-
 recommender = Recommender(file_name, num_neighbor, metric_function)
 
 
 result = recommender.run(prediction_function)
 
 
-print("\n#####################################################")
-print("\nMatriz final")
-print("\n#####################################################")
-Recommender.print_matrix("output.txt")
+print("\n\nMatrices resultantes  #####################################################\n")
 
-# Recommender.print_unnormalized_matrix("output.txt")
-
+recommender.print_matrix(recommender.matrix)
+recommender.print_matrix(recommender.unnormalized_matrix)
