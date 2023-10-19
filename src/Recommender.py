@@ -14,25 +14,24 @@ class Recommender:
 
 
   def run(self, prediction_function):
-    print("\n#####################################################")
-    print("\nMatriz Inicial")
-    print("\n#####################################################")
+    print("\n\nMatriz inicial  ###############################################################\n")        
     self.print_matrix(self.matrix)
     self.calculate_prediction_queue()
+
     iterator = 0
     while self.prediction_queue:
-      self.coordinate_prediction  = self.prediction_queue.pop(0)
+      self.coordinate_prediction = self.prediction_queue.pop(0)
       self.neighbors = self.get_neighbors(self.num_neighbors, self.similarity_function(self))
       if len(self.neighbors) == 0:
         self.prediction_queue.append(self.coordinate_prediction)
         continue
-      # print("Los vecinos son: ", Recommender.neighbors)
       result = prediction_function(self)
       self.matrix[self.coordinate_prediction[0]][self.coordinate_prediction[1]] = result
-      print("\n#####################################################")
-      print(f"\nMatriz en la iteración {iterator}")
-      print("\n#####################################################")
+      print(f"\n\nMatriz en la iteración {iterator}  #####################################################\n")    
       self.print_matrix(self.matrix)
+      print("\nLa posición que se acaba de predecir es", self.coordinate_prediction, " : ", result)
+      print("\nLas similitudes son ", self.similarity_function(self))
+      print("\nLos vecinos seleccionados son ", self.neighbors)
       iterator += 1
     self.unnormalized_matrix = self.denormalize(self.matrix)
     return self.matrix    
