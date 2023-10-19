@@ -13,6 +13,7 @@ class SimplePrediction(Prediction):
       denominator += abs(similarity_value) 
     result = numerator / denominator
     ################## Todo
-    if result < Recommender.lower:
-      return Recommender.lower
+    # if result < Recommender.lower:
+    #   return Recommender.lower
+    
     return result

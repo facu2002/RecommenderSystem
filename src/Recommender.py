@@ -6,15 +6,15 @@ class Recommender:
   lower = None
   upper = None
   matrix = []
-  matrix_mala = []
+  unnormalized_matrix = []
   neighbors = []
   coordinate_prediction = (None, None)
   
   
   def __init__(self, file_name, num_neighbors, similarity_function):
-    Recommender.lower, Recommender.upper, Recommender.matrix_mala = load_data(file_name)
-    ### normalizar  CAMBIAR LO DE MATRIZ MALA
-    Recommender.matrix = self.normalizar(Recommender.matrix_mala)
+    # Recommender.lower, Recommender.upper, Recommender.matrix = load_data(file_name)
+    Recommender.lower, Recommender.upper, Recommender.unnormalized_matrix = load_data(file_name)
+    Recommender.matrix = self.normalize(Recommender.unnormalized_matrix)
     self.num_neighbors = num_neighbors
     self.similarity_function = similarity_function
     self.prediction_queue = None
@@ -33,13 +33,16 @@ class Recommender:
       if len(Recommender.neighbors) == 0:
         self.prediction_queue.append(Recommender.coordinate_prediction)
         continue
-      result = round(prediction_function(), 2)
+      print("Los vecinos son: ", Recommender.neighbors)
+      result = prediction_function()
       Recommender.matrix[Recommender.coordinate_prediction[0]][Recommender.coordinate_prediction[1]] = result
       print("\n#####################################################")
       print(f"\nMatriz en la iteración {iterator}")
       print("\n#####################################################")
       self.print_matrix()
       iterator += 1
+    
+    Recommender.unnormalized_matrix = self.denormalize(Recommender.matrix)
     return Recommender.matrix    
 
 
@@ -63,6 +66,28 @@ class Recommender:
             print(f"{element:<6}", end=" ")  
         print()
         print("", file=file)
+
+  def print_unnormalized_matrix(self, out_file="output.txt"):
+    with open(out_file, "w") as file:
+      
+      aux = f"\nLa matriz de {len(Recommender.unnormalized_matrix)} X {len(Recommender.unnormalized_matrix[0])}\n"
+      aux += f"El rango de los valores es {Recommender.lower} - {Recommender.upper}\n"
+      # print(aux, file=file)
+      print(aux)
+
+      if len(Recommender.unnormalized_matrix) == 0:
+        return
+      for row in Recommender.unnormalized_matrix:
+        for element in row:
+          if element == None:
+            # print(f"{'-':<6}", end=" ", file=file)
+            print(f"{'-':<6}", end=" ")
+          else:
+            # print(f"{element:<6}", end=" ", file=file)
+            print(f"{element:<6}", end=" ")  
+        print()
+        # print("", file=file)
+
 
 
   def mean_rows(matrix, user, intersecting_columns):
@@ -128,7 +153,27 @@ class Recommender:
 
 
 
-  def normalizar(self, matrix_mala):
-    
-
-    return matrix_mala
+  def normalize(self, matrix):
+    result = []
+    for row_aux in matrix:
+      row = []
+      for i in range(len(row_aux)):
+        if row_aux[i] != None:
+          row.append((row_aux[i] - Recommender.lower) / (Recommender.upper - Recommender.lower))
+        else:
+          row.append(None)
+      result.append(row)
+    return result
+  
+  
+  def denormalize(self, matrix):
+    result = []
+    for row_aux in matrix:
+      row = []
+      for i in range(len(row_aux)):
+        if row_aux[i] != None:
+          row.append((row_aux[i] * (Recommender.upper - Recommender.lower)) + Recommender.lower)
+        else:
+          row.append(None)
+      result.append(row)
+    return result

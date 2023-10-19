@@ -72,3 +72,5 @@ print("\nMatriz final")
 print("\n#####################################################")
 Recommender.print_matrix("output.txt")
 
+# Recommender.print_unnormalized_matrix("output.txt")
+
