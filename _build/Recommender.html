@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recommender module &mdash; Recommender System  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Recommender System
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Recommender module</a><ul>
+<li><a class="reference internal" href="#Recommender.Recommender"><code class="docutils literal notranslate"><span class="pre">Recommender</span></code></a><ul>
+<li><a class="reference internal" href="#Recommender.Recommender.calculate_prediction_queue"><code class="docutils literal notranslate"><span class="pre">Recommender.calculate_prediction_queue()</span></code></a></li>
+<li><a class="reference internal" href="#Recommender.Recommender.calculate_priority"><code class="docutils literal notranslate"><span class="pre">Recommender.calculate_priority()</span></code></a></li>
+<li><a class="reference internal" href="#Recommender.Recommender.denormalize"><code class="docutils literal notranslate"><span class="pre">Recommender.denormalize()</span></code></a></li>
+<li><a class="reference internal" href="#Recommender.Recommender.get_neighbors"><code class="docutils literal notranslate"><span class="pre">Recommender.get_neighbors()</span></code></a></li>
+<li><a class="reference internal" href="#Recommender.Recommender.intersection_qualified_items"><code class="docutils literal notranslate"><span class="pre">Recommender.intersection_qualified_items()</span></code></a></li>
+<li><a class="reference internal" href="#Recommender.Recommender.mean_rows"><code class="docutils literal notranslate"><span class="pre">Recommender.mean_rows()</span></code></a></li>
+<li><a class="reference internal" href="#Recommender.Recommender.normalize"><code class="docutils literal notranslate"><span class="pre">Recommender.normalize()</span></code></a></li>
+<li><a class="reference internal" href="#Recommender.Recommender.print_matrix"><code class="docutils literal notranslate"><span class="pre">Recommender.print_matrix()</span></code></a></li>
+<li><a class="reference internal" href="#Recommender.Recommender.run"><code class="docutils literal notranslate"><span class="pre">Recommender.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Recommender System</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Recommender module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Recommender.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-Recommender">
+<span id="recommender-module"></span><h1>Recommender module<a class="headerlink" href="#module-Recommender" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="Recommender.Recommender">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Recommender.</span></span><span class="sig-name descname"><span class="pre">Recommender</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_neighbors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">similarity_function</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Recommender.html#Recommender"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Recommender.Recommender" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Recommender.Recommender.calculate_prediction_queue">
+<span class="sig-name descname"><span class="pre">calculate_prediction_queue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Recommender.html#Recommender.calculate_prediction_queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Recommender.Recommender.calculate_prediction_queue" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Recommender.Recommender.calculate_priority">
+<span class="sig-name descname"><span class="pre">calculate_priority</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Recommender.html#Recommender.calculate_priority"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Recommender.Recommender.calculate_priority" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Recommender.Recommender.denormalize">
+<span class="sig-name descname"><span class="pre">denormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Recommender.html#Recommender.denormalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Recommender.Recommender.denormalize" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Recommender.Recommender.get_neighbors">
+<span class="sig-name descname"><span class="pre">get_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">similarity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Recommender.html#Recommender.get_neighbors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Recommender.Recommender.get_neighbors" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Recommender.Recommender.intersection_qualified_items">
+<span class="sig-name descname"><span class="pre">intersection_qualified_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Recommender.html#Recommender.intersection_qualified_items"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Recommender.Recommender.intersection_qualified_items" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Recommender.Recommender.mean_rows">
+<span class="sig-name descname"><span class="pre">mean_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intersecting_columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Recommender.html#Recommender.mean_rows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Recommender.Recommender.mean_rows" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Recommender.Recommender.normalize">
+<span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Recommender.html#Recommender.normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Recommender.Recommender.normalize" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Recommender.Recommender.print_matrix">
+<span class="sig-name descname"><span class="pre">print_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'output.txt'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Recommender.html#Recommender.print_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Recommender.Recommender.print_matrix" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Recommender.Recommender.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prediction_function</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Recommender.html#Recommender.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Recommender.Recommender.run" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Daniel Felipe &amp; Facundo José.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
