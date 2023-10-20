@@ -16,4 +16,12 @@ class DifferenceAverage(Prediction):
       mean_v = sum(aux_mean_v) / len(aux_mean_v)
       numerator += similarity_value * (recommender.matrix[similarity_key[1]][recommender.coordinate_prediction[1]] - mean_v)
       denominator += abs(similarity_value)
-    return mean_u + (numerator / denominator)
+    if denominator == 0:
+      return 0
+    result = mean_u + (numerator / denominator)
+    # Aquí lo que hacemos es normalizar el limite inferior, pero como es el menor de los valores, debemos poner 0
+    # ocurre lo mismo con el limite superior, que daría siempre 1, ya que al normalizarlo, los valores están entre 0 y 1
+    lower_normalized = 0
+    if result < lower_normalized:
+      return 0
+    return result
