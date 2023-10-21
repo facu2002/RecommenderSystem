@@ -174,7 +174,8 @@ class Recommender:
     # Convertir la lista en una cola de prioridad (heap)
     indices_none = []
     for row in sorted(priority_rows, key=lambda x: x[0]):
-      indices_none += [(row[1],indice) for indice, valor in enumerate(self.matrix[row[1]]) if valor is None]
+      indices_none += [(row[1],indice) for indice, valor in enumerate(self.matrix[row[1]]) if valor is None and not(all(row_matrix[indice] is None for row_matrix in self.matrix))
+]
     self.prediction_queue = indices_none
     
     
