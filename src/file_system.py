@@ -1,7 +1,7 @@
 
 def load_data(file_name):
   """
-    Function that parses the input file and returns the initialized values
+    Function that parses the input file and returns the initialized values.
     Args:
         file_name: name of the file from which the data is extracted.
     Returns:
