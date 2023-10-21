@@ -72,6 +72,16 @@
 
 <div class="viewcode-block" id="Recommender"><a class="viewcode-back" href="../Recommender.html#Recommender.Recommender">[docs]</a><span class="k">class</span> <span class="nc">Recommender</span><span class="p">:</span>
   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">num_neighbors</span><span class="p">,</span> <span class="n">similarity_function</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructor of the Recommender class, responsible for creating instances of the class</span>
+<span class="sd">    Args:</span>
+<span class="sd">        self: argument that refers to the created instance of the class.</span>
+<span class="sd">        file_name: name of the file from which the data is extracted.</span>
+<span class="sd">        num_neighbors: number of neighbors selected by the user.</span>
+<span class="sd">        similarity_function: similarity function selected by the user.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the created instance of the Recommender class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Se inicializan los valores necesarios y se normaliza la matriz</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unnormalized_matrix</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unnormalized_matrix</span><span class="p">)</span>
@@ -82,6 +92,14 @@
 
 
 <div class="viewcode-block" id="Recommender.run"><a class="viewcode-back" href="../Recommender.html#Recommender.Recommender.run">[docs]</a>  <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prediction_function</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function responsible for filling the matrix with the predicted ratings.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        self: argument that refers to the created instance of the class.</span>
+<span class="sd">        prediction_function: prediction function selected by the user.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Matrix with all values already calculated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Matriz inicial  ###############################################################</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>        
     <span class="bp">self</span><span class="o">.</span><span class="n">print_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">calculate_prediction_queue</span><span class="p">()</span>
@@ -107,6 +125,15 @@
 
 
 <div class="viewcode-block" id="Recommender.print_matrix"><a class="viewcode-back" href="../Recommender.html#Recommender.Recommender.print_matrix">[docs]</a>  <span class="k">def</span> <span class="nf">print_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="s2">&quot;output.txt&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function responsible for filling the matrix with the predicted ratings.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        self: argument that refers to the created instance of the class.</span>
+<span class="sd">        matrix: matrix that you want to print.</span>
+<span class="sd">        out_file: file in which you want the output, by default output.txt</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        void</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
       <span class="n">aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">La matriz de </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="si">}</span><span class="s2"> X </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
       <span class="n">aux</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;El rango de los valores es </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -128,6 +155,16 @@
 
 
 <div class="viewcode-block" id="Recommender.mean_rows"><a class="viewcode-back" href="../Recommender.html#Recommender.Recommender.mean_rows">[docs]</a>  <span class="k">def</span> <span class="nf">mean_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">intersecting_columns</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that is responsible for taking the arithmetic mean of a row.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        self: argument that refers to the created instance of the class.</span>
+<span class="sd">        matrix: matrix that you want to use.</span>
+<span class="sd">        user: user of whom you want to know the arithmetic mean.</span>
+<span class="sd">        intersecting_columns: matching columns for a real arithmetic mean.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Arithmetic mean of the row.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersecting_columns</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
       <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
@@ -139,15 +176,31 @@
 
 
 <div class="viewcode-block" id="Recommender.intersection_qualified_items"><a class="viewcode-back" href="../Recommender.html#Recommender.Recommender.intersection_qualified_items">[docs]</a>  <span class="k">def</span> <span class="nf">intersection_qualified_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-    <span class="n">intersection_items</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">row1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
-    <span class="n">row2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that returns the intersection of qualified items between two users.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        self: argument that refers to the created instance of the class.</span>
+<span class="sd">        u: first user to analyze</span>
+<span class="sd">        v: second user to analyze</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        List of items rated by both users.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
     <span class="c1"># buscamos los indices de los elementos no nulos</span>
-    <span class="k">return</span> <span class="p">[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row1</span><span class="p">))</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span></div>
+    <span class="k">return</span> <span class="p">[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">))</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span></div>
 
 
 
 <div class="viewcode-block" id="Recommender.get_neighbors"><a class="viewcode-back" href="../Recommender.html#Recommender.Recommender.get_neighbors">[docs]</a>  <span class="k">def</span> <span class="nf">get_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_neighbor</span><span class="p">,</span> <span class="n">similarity</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that returns the users that are most similar to the main user.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        self: argument that refers to the created instance of the class.</span>
+<span class="sd">        num_neighbor: number of users</span>
+<span class="sd">        similarity: list of similarities of both users</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        List of users that are most similar to the main user</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Ordena el diccionario por los valores de forma descendente</span>
     <span class="n">ordered_similarity</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">similarity</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">similarity</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">neighbors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -164,11 +217,26 @@
   
   
 <div class="viewcode-block" id="Recommender.calculate_priority"><a class="viewcode-back" href="../Recommender.html#Recommender.Recommender.calculate_priority">[docs]</a>  <span class="k">def</span> <span class="nf">calculate_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that calculates the priority of a row that will be inserted in the queue </span>
+<span class="sd">    Args:</span>
+<span class="sd">        self: argument that refers to the created instance of the class.</span>
+<span class="sd">        row: row that it is analyzed</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Priority of a row based on the number of Nones</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="n">row</span> <span class="k">if</span> <span class="n">elemento</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="Recommender.calculate_prediction_queue"><a class="viewcode-back" href="../Recommender.html#Recommender.Recommender.calculate_prediction_queue">[docs]</a>  <span class="k">def</span> <span class="nf">calculate_prediction_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that fill the prediction_queue attribute with all the row priorities. </span>
+<span class="sd">    Args:</span>
+<span class="sd">        self: argument that refers to the created instance of the class.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Void</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Crear una lista de tuplas donde el primer elemento es la prioridad y el segundo es la fila</span>
     <span class="n">priority_rows</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculate_priority</span><span class="p">(</span><span class="n">row</span><span class="p">),</span> <span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="p">)]</span>
     <span class="c1"># Convertir la lista en una cola de prioridad (heap)</span>
@@ -180,6 +248,14 @@
     
     
 <div class="viewcode-block" id="Recommender.normalize"><a class="viewcode-back" href="../Recommender.html#Recommender.Recommender.normalize">[docs]</a>  <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that given a matrix, normalizes its values.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        self: argument that refers to the created instance of the class.</span>
+<span class="sd">        matrix: matrix that you want to normalize</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Matrix with all normalized values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">row_aux</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">:</span>
       <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
@@ -194,6 +270,14 @@
   
   
 <div class="viewcode-block" id="Recommender.denormalize"><a class="viewcode-back" href="../Recommender.html#Recommender.Recommender.denormalize">[docs]</a>  <span class="k">def</span> <span class="nf">denormalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that given a normalized matrix, returns the original values.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        self: argument that refers to the created instance of the class.</span>
+<span class="sd">        matrix: matrix from which you want to obtain the original values</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Matrix with all orginal values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">row_aux</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">:</span>
       <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
