@@ -7,6 +7,13 @@ class PearsonCorrelation(Metric):
 
   @staticmethod
   def similarity(recommender):
+    """
+    Function that calculates the similarity between two users thanks to the Pearson correlation.
+    Args:
+        recommender: Instance of the Recommender class where the attributes necessary for the calculation of the similarity are found.
+    Returns:
+    Result of similarity.
+    """
     result = dict()
     for v in range(len(recommender.matrix)):
       if v == recommender.coordinate_prediction[0]:

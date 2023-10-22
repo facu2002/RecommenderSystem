@@ -7,6 +7,13 @@ class DifferenceAverage(Prediction):
 
   @staticmethod
   def predict(recommender):
+    """
+    Function that calculates the prediction of the value that a user provides to an item, trough the use of Difference Average.
+    Args:
+        recommender: Instance of the Recommender class where the attributes necessary for the calculation of the prediction are found.
+    Returns:
+    Result of prediction.
+    """
     aux_mean_u = list(filter(lambda x: x != None, recommender.matrix[recommender.coordinate_prediction[0]]))
     mean_u = sum(aux_mean_u) / len(aux_mean_u)
     numerator = 0

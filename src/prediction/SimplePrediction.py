@@ -4,8 +4,16 @@ from prediction.Prediction import Prediction
 from Recommender import Recommender
 
 class SimplePrediction(Prediction):
+  
   @staticmethod
   def predict(recommender):
+    """
+    Function that calculates the prediction of the value that a user provides to an item, trough the use of Simple Prediction.
+    Args:
+        recommender: Instance of the Recommender class where the attributes necessary for the calculation of the prediction are found.
+    Returns:
+    Result of prediction.
+    """
     numerator = 0
     denominator = 0
     print("EL neigbors tiene ", recommender.neighbors, "Ademas vemos que estamos prediciendo", recommender.coordinate_prediction)
