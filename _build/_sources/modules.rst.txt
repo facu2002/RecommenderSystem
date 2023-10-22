@@ -1,9 +1,16 @@
-src
-===
+prediction
+==========
 
 .. toctree::
    :maxdepth: 4
 
+   main
    Recommender
    file_system
-   main
+   Metric
+   PearsonCorrelation
+   CosineDistance
+   EuclideanDistance
+   Prediction
+   DifferenceAverage
+   SimplePrediction

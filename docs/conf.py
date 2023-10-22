@@ -16,6 +16,8 @@ author = 'Daniel Felipe & Facundo José'
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../src'))
+sys.path.insert(0, os.path.abspath('../src/metric'))
+sys.path.insert(0, os.path.abspath('../src/prediction'))
 
 # Configuración para incluir docstrings en la documentación
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode', 'sphinx.ext.todo']

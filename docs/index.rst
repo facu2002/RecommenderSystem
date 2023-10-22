@@ -10,6 +10,8 @@ Welcome to Recommender System's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   metric/modules
+   prediction/modules
 
 
 Indices and tables
