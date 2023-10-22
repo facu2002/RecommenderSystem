@@ -35,6 +35,8 @@ Por último, podemos hacer uso de un último parámetro, el parámetro de ayuda 
 
 El resultado de la ejecución del código puede interpretarse desde dos zonas, ya que hemos bifurcado la salida del mismo en dos diferentes áreas, la primera será la propia consola, que tendrá toda la información que se pide en el enunciado de la práctica (matriz de utilidad con la predicción de los elementos faltantes, similitud entre todos los vecinos del usuario del que se está calculando su predicción, los vecinos que se han seleccionado en el proceso de predicción y el cálculo de predicción de la matriz de utilidad en base a los vecinos seleccionados). Mientras que la segunda (que solo tendrá la matriz resultante), será un fichero de salida llamado output.txt ubicado en el directorio raíz del proyecto.
 
+En caso de no pasar ningún parámetro por línea de comando implementamos una alternativa en la que el programa se ejecuta mediante una interacción por línea de comandos.
+
 
 #### Descripción del código
 
